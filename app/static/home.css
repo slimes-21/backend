@@ -1,0 +1,36 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+/*search bar*/ 
+.friendsrow {
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: flex-start;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.friendrow input,
+.friendrow button {
+    border: black 1px solid;
+    /* Alex said he will deal with this cause its his job and he hasnt done anything yet. */
+    /* border-radius: 10px; */
+    /* Alex what do u thnk of making the borders the same gray as the placeholder color */
+    flex-grow: 1;
+    max-width: 100%;
+    margin-left: 10px;
+    padding: 10px;
+}
+
+.plus a{
+    text-align: center; 
+    margin:auto;
+    padding: 10;
+    width: 200px;
+    height: 30px;
+    right: 5%;
+}

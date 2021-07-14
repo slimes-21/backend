@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up - Skedge accounts</title>
+    <link rel="shortcut icon" type="image/jpg" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+    <div class="container">
+        <form class="form-container" method="POST">
+            <div class="Skedgelogo">Skedge.</div>
+            <h2>Sign up</h2>
+            <p>Create your Skedge Account</p> <br>
+
+            <div class="form-row">
+                <input type="text" name="first_name" placeholder="First Name">
+                <input type="text" name="last_name" placeholder="Last Name">
+            </div>
+
+            <div class="form-row">
+                <input type="text" name="email" placeholder="Email">
+            </div>
+            <div class="form-row">
+                <input type="password" name="password" placeholder="Password" class="pw1">
+                <input type="password" name="confirm_password" placeholder="Confirm" class="pw2">
+            </div>
+
+            <p id="passwordmessage"></p>
+
+            <div class="form-row">
+                <button type="submit" class="submit">SIGN UP</button>
+            </div><br>
+
+            <p>Already have an account? Sign in <a href="{{ url_for('login') }}">here</a></p>
+        </form>
+    </div>
+
+    <script>
+        //Passwords 
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            document.querySelector('.submit').addEventListener('click', function() {
+                let pw1 = document.querySelector('.pw1');
+                let pw2 = document.querySelector('.pw2');
+              
+                if (pw1.value == "" || pw2.value == "") {
+                    alert("Field cannot be empty");
+                }
+
+                else if (pw1 != pw2) {
+                    alert("Passwords must be matching")
+                } 
+            });
+        });
+
+        //won't just be a window alert button, will need for divs to move around first 
+
+    </script>
+</body>
+
+</html>
