@@ -9,6 +9,6 @@ class Timetable:
             if start:
                 self.subjects.append(Subject(line))
             else:
-                if 'Subject Code,Description,Group,Activity,Day,Time,Campus,Location,Staff,Duration,Dates' in line:
+                if 'Subject Code!Description!Group!Activity!Day!Time!Campus!Location!Staff!Duration!Dates' in line:
                     start = True
                     continue

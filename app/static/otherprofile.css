@@ -83,10 +83,10 @@ body {
 .bio {
     background-color: white;
     width: 50%;
-    text-align: left;
     padding: 30px;
     border-radius: 20px;
     border: #e7e0e0 1px solid;
+    margin: 0 auto;
 }
 
 
@@ -101,4 +101,13 @@ body {
 
 .classes ul {
     text-align: left;
+}
+
+.margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+body {
+    text-align: center;
 }

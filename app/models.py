@@ -38,6 +38,20 @@ class User(UserMixin, db.Model):
             or_(Friendship.sender_id == self.id, Friendship.receiver_id == self.id)).filter_by(
             status=True).all()
 
+    def is_friend(self, user):
+        return int(Friendship.query.filter(
+            or_(Friendship.sender_id == self.id, Friendship.receiver_id == user.id)).filter_by(
+            status=True).count() + Friendship.query.filter(
+            or_(Friendship.sender_id == user.id, Friendship.receiver_id == self.id)).filter_by(
+            status=True).count()) > 0
+
+    def pending_friend(self, user):
+        return int(Friendship.query.filter(
+            or_(Friendship.sender_id == self.id, Friendship.receiver_id == user.id)).filter_by(
+            status=False).count() + Friendship.query.filter(
+            or_(Friendship.sender_id == user.id, Friendship.receiver_id == self.id)).filter_by(
+            status=False).count()) > 0
+
     def reject_request(self, user):
         self.unfriend_user(user)
 

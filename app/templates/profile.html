@@ -12,9 +12,15 @@
     <div class="bar">
         <div class="Skedgelogoindex"><a href="{{ url_for('index') }}">Skedge.</a></div>
         <ul class="log-in-out">
-            <div class="centerplease">
-                <input type="text" placeholder="Search for friends.." class="search">
-            </div>
+            <form class="centerplease" id="searchFriends">
+                <input type="text" id="friendsInput" placeholder="Search for friends.." class="search">
+                <input type="submit" style="display:none"/>
+            </form>
+            <a href="{{ url_for('home') }}" class="notextdec">
+                <div class="rounded_border">
+                    <li>Home</li>
+                </div>
+            </a>
             <a href="{{ url_for('logout') }}" class="notextdec">
                 <div class="rounded_border">
                     <li>Sign Out</li>
@@ -33,7 +39,8 @@
             <div class="Skedgelogo">Skedge.</div>
 
             <div class="form-row" id="noresize">
-                <textarea id="newbio" name="bio" rows="6" cols="40" placeholder="Enter your new biography">{{ current_user.bio }}</textarea>
+                <textarea id="newbio" name="bio" rows="6" cols="40"
+                          placeholder="Enter your new biography">{{ current_user.bio }}</textarea>
             </div>
 
 
@@ -55,8 +62,8 @@
                 <ul>
                     {% for request in friend_requests %}
                         <li>
-                            {{ request.get_sender().get_full_name() }}
-                            <a href="/accept/{{ request.get_sender().username }}">
+                            {{ request.get_sender().get_full_name() }} wants to be your friend! <br>
+                            <a href="/accept/{{ request.get_sender().username }}" style="text-decoration: none">
                                 <button>Accept this request</button>
                             </a>
                             <a href="/reject/{{ request.get_sender().username }}">
@@ -71,6 +78,17 @@
 </div>
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $("#searchFriends").on("submit", function (event) {
+        event.preventDefault();
+        let query = $("#friendsInput").val()
+        if (query === "")
+            return
+        window.location.href = "/profile/" + query;
+    })
+</script>
 </body>
 
 </html>

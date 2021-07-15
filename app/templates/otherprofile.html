@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='otherprofile.css') }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="bar">
+        <div class="Skedgelogoindex"><a href="{{ url_for('index') }}">Skedge.</a></div>
+        <ul class="log-in-out">
+            <a href="{{ url_for('home') }}" class="notextdec">
+                <div class="rounded_border">
+                    <li>Home</li>
+                </div>
+            </a>
+            <a href="{{ url_for('logout') }}" class="notextdec">
+                <div class="rounded_border">
+                    <li>Sign Out</li>
+                </div>
+            </a>
+        </ul>
+    </div>
+</nav>
+<div class="padding">
+</div>
+
+<div class="bio">
+    <div class="aboutyou">About {{ user.get_full_name() }}:</div>
+    {{ user.bio }}
+</div>
+
+{% if current_user.is_friend(user) %}
+    <div class="frsent">
+        You are already friends with this user.
+    </div>
+{% elif current_user.pending_friend(user) %}
+    <div class="frsent">
+        Friend request sent
+    </div>
+{% else %}
+    <a href="/request/{{ user.username }}">
+        <button class="margin">Send a friend request to this user</button>
+    </a>
+{% endif %}
+
+
+</body>
+</html>

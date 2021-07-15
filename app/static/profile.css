@@ -115,8 +115,6 @@ body {
     border: 2px solid rgb(0, 172, 224);
     border-radius: 20px;
     outline: none;
-    margin-top: 10px;
-    margin-left: 5px;
     margin-right: 10%;
     width: 60%;
     height: auto;
@@ -124,6 +122,14 @@ body {
     object-position: right;
 }
 
+.incfriendrequests ul {
+    list-style: none;
+    text-align: center;
+}
+
+.incfriendrequests ul li {
+    text-align: center;
+}
 
 .container {
     margin: 0;
@@ -170,4 +176,9 @@ body {
 
 .form-row {
     padding-bottom: 10px;
+}
+
+.error {
+    color: red;
+    padding: 10px; 
 }

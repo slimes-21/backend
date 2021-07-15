@@ -74,7 +74,47 @@ def logout():
 @app.route('/home')
 @login_required
 def home():
-    return render_template('home.html')
+    date_legend = {"Mon": 1, "Tue": 2, "Wed": 3, "Thu": 4, "Fri": 5}
+    time_legend = {"8:00": 1, "8:30": 2, "9:00": 3, "9:30": 4, "10:00": 5, "10:30": 6, "11:00": 7, "11:30": 8,
+                   "12:00": 9, "12:30": 10, "13:00": 11, "13:30": 12, "14:00": 13, "14:30": 14, "15:00": 15,
+                   "15:30": 16, "16:00": 17, "16:30": 18, "17:00": 19, "17:30": 20, "18:00": 21, "18:30": 22,
+                   "19:00": 23, "19:30": 24, "20:00": 25, "20:30": 26}
+    time_rev_legend = dict((v, k) for k, v in time_legend.items())
+    table = []
+    for i in range(1, 27):
+        row = []
+        if i % 2 != 0:
+            row.append(f"<td id=\"c1\">{time_rev_legend[i]}</td>")
+        else:
+            row.append("<td></td>")
+        row += ["<td></td>"] * 5
+        table.append(row)
+    timetable = current_user.get_timetable()
+    if timetable is not None:
+        friends_timetable = []
+        friends = request.args.get("friends")
+        if friends is not None:
+            for friend in friends.split(","):
+                friend_user = User.query.filter_by(username=friend).first()
+                if friend_user:
+                    friends_timetable.append((friend_user, friend_user.get_timetable()))
+        for subject in timetable.subjects:
+            row_index = time_legend[subject.time] - 1
+            col_index = date_legend[subject.day]
+            duration = int(float(subject.duration.split(" ")[0]) * 2)
+            same_friends = []
+            for friend_user, friend_timetable in friends_timetable:
+                for friend_subject in friend_timetable.subjects:
+                    if friend_subject == subject:
+                        same_friends.append(friend_user.username)
+                        break
+            for i in range(row_index, row_index + duration):
+                if same_friends:
+                    table[i][
+                        col_index] = f"<td><div class=\"haveclass\"><div class=\"friendhaveclasstoo\" friends=\"{','.join(same_friends)}\">{subject.code}</div></div></td>"
+                else:
+                    table[i][col_index] = f"<td><div class=\"haveclass\">{subject.code}</div></td>"
+    return render_template('home.html', table=table)
 
 
 @app.route('/profile/<username>')
@@ -83,7 +123,7 @@ def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
     if user == current_user:
         return redirect(url_for('self_profile'))
-    return render_template('other_profile.html', user=user)
+    return render_template('otherprofile.html', user=user)
 
 
 @app.route('/profile', methods=['GET', 'POST'])
@@ -100,7 +140,7 @@ def self_profile():
             return render_template('profile.html', error='Please upload a valid xls file',
                                    friend_requests=current_user.get_pending_requests())
         input_excel = pd.read_excel(timetable.read(), dtype=str)
-        output_csv = input_excel.to_csv()
+        output_csv = input_excel.to_csv(sep="!")
         current_user.timetable = output_csv
 
     current_user.bio = bio
