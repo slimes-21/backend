@@ -106,10 +106,11 @@ def home():
             duration = int(float(subject.duration.split(" ")[0]) * 2)
             same_friends = []
             for friend_user, friend_timetable in friends_timetable:
-                for friend_subject in friend_timetable.subjects:
-                    if friend_subject == subject:
-                        same_friends.append(friend_user.get_full_name())
-                        break
+                if friend_timetable is not None:
+                    for friend_subject in friend_timetable.subjects:
+                        if friend_subject == subject:
+                            same_friends.append(friend_user.get_full_name())
+                            break
             for i in range(row_index, row_index + duration):
                 if same_friends:
                     table[i][
@@ -139,7 +140,8 @@ def self_profile():
     if timetable:
         _, file_ext = os.path.splitext(timetable.filename)
         if file_ext not in ['.xls']:
-            return render_template('profile.html', error='Please upload a valid xls file. You can get this from Allocate',
+            return render_template('profile.html',
+                                   error='Please upload a valid xls file. You can get this from Allocate',
                                    friend_requests=current_user.get_pending_requests())
         input_excel = pd.read_excel(timetable.read(), dtype=str)
         output_csv = input_excel.to_csv(sep="!")
@@ -147,7 +149,7 @@ def self_profile():
 
     current_user.bio = bio
     db.session.commit()
-    return redirect(url_for('self_profile'))
+    return redirect(url_for('home'))
 
 
 @app.route('/request/<username>')
