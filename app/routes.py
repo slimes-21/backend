@@ -1,7 +1,9 @@
+import os
 from app import app, db
-from flask import request, redirect, url_for, render_template, send_from_directory, jsonify
+from flask import request, redirect, url_for, render_template
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
+import pandas as pd
 
 
 @app.route('/')
@@ -20,21 +22,21 @@ def signup():
 
     first_name = request.form['first_name']
     last_name = request.form['last_name']
-    email = request.form['email']
+    username = request.form['username']
     password = request.form['password']
     confirm_password = request.form['confirm_password']
 
-    if first_name == '' or last_name == '' or email == '' or password == '' or confirm_password == '':
+    if first_name == '' or last_name == '' or username == '' or password == '' or confirm_password == '':
         return render_template('sign_up.html', error='Missing required fields')
 
     if password != confirm_password:
         return render_template('sign_up.html', error="Confirm password and password must match")
 
-    existing_user = User.query.filter_by(email=email).first()
+    existing_user = User.query.filter_by(username=username).first()
     if existing_user is not None:
-        return render_template('sign_up.html', error="Email is already in use")
+        return render_template('sign_up.html', error="Username is already in use")
 
-    user = User(first_name=first_name, last_name=last_name, email=email)
+    user = User(first_name=first_name, last_name=last_name, username=username)
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
@@ -74,6 +76,76 @@ def logout():
 def home():
     return render_template('home.html')
 
+
+@app.route('/profile/<username>')
+@login_required
+def profile(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    if user == current_user:
+        return redirect(url_for('self_profile'))
+    return render_template('other_profile.html', user=user)
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def self_profile():
+    if request.method == 'GET':
+        return render_template('profile.html')
+    bio = request.form['bio']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    email = request.form['email']
+    username = request.form['username']
+
+    existing_user = User.query.filter_by(username=username).first()
+    if existing_user is not None and existing_user != current_user:
+        return render_template('profile.html', error='That username is already in use')
+    timetable = request.files.get('timetable', None)
+    if timetable:
+        _, file_ext = os.path.splitext(timetable.filename)
+        if file_ext not in ['.xls']:
+            return render_template('profile.html', error='Please upload a valid xls file')
+        input_excel = pd.read_excel(timetable.read(), dtype=str)
+        output_csv = input_excel.to_csv()
+        current_user.timetable = output_csv
+
+    current_user.bio = bio
+    current_user.first_name = first_name
+    current_user.last_name = last_name
+    current_user.username = username
+    db.session.commit()
+
+    return redirect(url_for('self_profile'))
+
+
+@app.route('/request/<username>')
+@login_required
+def request_friend(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    if user == current_user:
+        return redirect(url_for('self_profile'))
+    current_user.request_user(user)
+    return redirect(url_for('self_profile'))
+
+
+@app.route('/accept/<username>')
+@login_required
+def accept_friend(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    if user == current_user:
+        return redirect(url_for('self_profile'))
+    current_user.accept_request(user)
+    return redirect(url_for('self_profile'))
+
+
+@app.route('/reject/<username>')
+@login_required
+def reject_friend(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    if user == current_user:
+        return redirect(url_for('edit_profile'))
+    current_user.reject_request(user)
+    return redirect(url_for('edit_profile'))
 
 # @app.errorhandler(404)
 # def not_found_error(error):

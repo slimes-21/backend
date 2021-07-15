@@ -48,12 +48,6 @@
     align-items: center;
 } */
 
-
-.topbar {
-    /* random shit */
-    /* nice */
-}
-
 body {
     background-color: #fdfdfd;
 
@@ -86,18 +80,7 @@ button {
     text-align: center;
     padding: 30px;
     border-radius: 20px;
-    border: #e7e0e0 1px solid;
-}
-
-.table-container {
-    margin-top: 50px;
-    margin-left: 5%;
-    background-color: white;
-    text-align: center;
-    padding: 30px;
-    border-radius: 20px;
-    border: #e7e0e0 1px solid;
-    display: inline-block;
+    border:rgb(0, 172, 224) 1px solid;
 }
 
 .form-container h1 {
@@ -135,58 +118,6 @@ body {
     margin: 0;
 }
 
-#friend-list {
-    display: block;
-    margin: 0;
-    padding: 0;
-    width: 350px;
-    height: 500px;
-    background: #fdfdfd;
-    list-style-type: none;
-    position: absolute;
-    right: 9%;
-    top: 25%;
-}
-
-
-
-table th {
-    text-align: center;
-    background-color: white;
-    border: 1px solid #dadada;
-    color: rgb(119, 119, 119);
-    width: 200px;
-    height: 30px;
-}
-
-table td {
-    text-align: center;
-    background-color: white;
-    border: 1px solid #dadada;
-    color: rgb(119, 119, 119);
-    width: 200px;
-    height: 30px;
-}
-
-th {
-    font-weight: normal;
-}
-
-
-table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-#c1 {
-    width: 60px;
-}
-
-#leftforce {
-    text-align: left;
-}
-
 .Skedgelogohome {
     width: center;
     height: 38px;
@@ -197,3 +128,93 @@ table {
     margin-bottom: 20px;
     align-items: left;
 }
+
+.button{
+    background-color: rgb(0, 172, 224);
+    color: white;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 20px;
+    
+  }
+
+
+  .navbar {
+    background: #fdfdfd;
+    width: 100%;
+    position: fixed;
+    z-index: 0;
+    padding: 10px 0;
+    
+}
+
+.log-in-out li a {
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 25px;
+    text-decoration: none;
+}
+
+.bar {
+    width: 80%;
+    margin: auto;
+    padding: 0px 30px;
+}
+
+.navbar .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .log-in-out {
+    display: inline-flex;
+}
+
+.log-in-out li {
+    list-style: none;
+    
+}
+
+.padding {
+    padding-top: 180px;
+}
+
+.Skedgelogoindex:hover b {
+    color: #1900ff;
+}
+
+.navbar .Skedgelogoindex a {
+    color: rgb(0, 172, 224);
+    font-size: 50px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.rounded_border {
+    padding: 10px 9px;
+    border: 2px solid rgb(0, 172, 224);
+    border-radius: 20px;
+    outline: none;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+
+.notextdec {
+    text-decoration: none;
+    color: rgb(0, 172, 224);
+    font-weight: 150;
+}
+
+.error_msg {
+    color: red;
+} 

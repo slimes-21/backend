@@ -1,13 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
     <link rel="shortcut icon" type="image/jpg" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
 <body>
-    
+<nav class="navbar">
+    <div class="bar">
+        <div class="Skedgelogoindex"><a href="{{ url_for('index') }}">Skedge.</a></div>
+        <ul class="log-in-out">
+            <a href="{{ url_for('logout') }}" class="notextdec">
+                <div class="rounded_border">
+                    <li>Sign Out</li>
+                </div>
+            </a>
+        </ul>
+    </div>
+</nav>
+<div class="padding">
+</div>
+<div class="incfriendrequests">
+    <div class="pleasegototheright">
+        You have 3 incoming friend requests
+        <ul>
+            <li>
+                Alexander Mai wants to be your friend!
+                <button>Accept this request</button>
+                <button>Decline this request</button>
+            </li>
+            <li>
+                Raymond He wants to be your friend!
+                <button>Accept this request</button>
+                <button>Decline this request</button>
+            </li>
+            <li>
+                Andrew Wang wants to be your friend!
+                <button>Accept this request</button>
+                <button>Decline this request</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <form class="form-container" method="POST" enctype="multipart/form-data">
+        <div class="Skedgelogo">Skedge.</div>
+
+        <div class="form-row" id="noresize">
+            <textarea id="newbio" name="bio" rows="6" cols="40" placeholder="Enter your new biography"></textarea>
+        </div>
+
+
+        <div class="form-row">
+            <button type="submit" class="submit">Save</button>
+        </div>
+        <div>
+            Insert a new csv file
+            <input type="file" id="myFile" name="timetable">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
 </body>
+
 </html>

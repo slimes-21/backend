@@ -6,9 +6,8 @@
     background: #fdfdfd;
     width: 100%;
     position: fixed;
-    z-index: 0;
+    z-index: 99;
     padding: 10px 0;
-    
 }
 
 .log-in-out li a {
@@ -41,7 +40,7 @@
 }
 
 .padding {
-    padding-top: 180px;
+    padding-top: 150px;
 }
 
 .Skedgelogoindex:hover b {
@@ -91,85 +90,63 @@ body {
     font-weight: 150;
 }
 
-.paragraphleft {
-    idk;
-}
-
-.paragraphright {
-    test; 
-}
-
-.block { 
-    display: flex; 
-    justify-content: center; 
-}
-
-.headings {
-    display: flex; 
-    color:rgb(0, 172, 224)
-
-    
-
-}
-
-.skedgefooter {
-    color: rgb(0, 172, 224);
-    font-size: 50px;
-    font-weight: 600;
+.classes {
+    background-color: white;
+    width: 50%;
     text-align: center;
-    margin: auto;
-    padding: 10;
-    padding-bottom: 30px;
-
-} 
-
-.linkedin{
-    text-align: center;
-    margin: auto;
-    padding: 10
+    padding: 30px;
+    border-radius: 20px;
+    border: #e7e0e0 1px solid;
 }
 
-.textgoestoolong {
-    margin-right: %;
-    font-size: 26px;
-    color: #999999; 
-
+.newbio {
+    resize: none;
 }
-
-.birdleft { 
-    margin-right: 10%; 
-
-}
-
-.button{
-    background-color: rgb(0, 172, 224);
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    margin: 4px 2px;
-    border-radius: 29px;
-    
-  }
-
-.inline ul li {
-    display: inline;
-    padding: 10px;
-    padding-bottom: 5%;
-}
-
-.inline ul {
-    list-style-type: none;
+.aboutyou {
     text-align: center;
 }
 
-.sizingproblems1 {
-    max-width: 50%;
+.classes ul {
+    text-align: left;
+}
+
+.incfriendrequests {
+    padding: 10px 9px;
+    border: 2px solid rgb(0, 172, 224);
+    border-radius: 20px;
+    outline: none;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 200px;
     height: auto;
+    text-align: center;
+    object-position: right;
 }
-.sizingproblems {
-    max-width: 50%;
-    height: auto;
+
+
+.container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%; 
+    align-items: center;
+}
+
+.form-container {
+    background-color: white;
+    width: 35%;
+    text-align: center;
+    padding: 30px;
+    border-radius: 20px;
+    border:rgb(0, 172, 224) 1px solid;
+}
+
+.form-container h1 {
+    font-weight: 100;
+}
+
+
+.pleasegototheright {
+    object-position: right;
 }

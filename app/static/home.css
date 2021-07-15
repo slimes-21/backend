@@ -2,7 +2,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-/*search bar*/ 
+/*search bar*/
 .friendsrow {
     width: 100%;
     margin-bottom: 15px;
@@ -26,11 +26,228 @@
     padding: 10px;
 }
 
-.plus a{
-    text-align: center; 
-    margin:auto;
+.plus a {
+    text-align: center;
+    margin: auto;
     padding: 10;
     width: 200px;
     height: 30px;
     right: 5%;
+}
+
+table th {
+    text-align: center;
+    background-color: white;
+    border: 1px solid #dadada;
+    color: rgb(119, 119, 119);
+    width: 200px;
+    height: 30px;
+}
+
+table td {
+    text-align: center;
+    background-color: white;
+    border: 1px solid #dadada;
+    color: rgb(119, 119, 119);
+    width: 200px;
+    height: 30px;
+}
+
+th {
+    font-weight: normal;
+}
+
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+#c1 {
+    width: 60px;
+}
+
+#leftforce {
+    text-align: left;
+}
+
+#friend-list {
+    display: block;
+    padding: 0;
+    width: 350px;
+    height: 540px;
+    background: #fdfdfd;
+    list-style-type: none;
+    border-radius: 20px;
+    border: #e7e0e0 1px solid;
+    margin: 0 0 0 20px;
+}
+
+.table-container {
+    margin-left: 5%;
+    background-color: white;
+    text-align: center;
+    padding: 30px;
+    border-radius: 20px;
+    border: #e7e0e0 1px solid;
+    display: inline-block;
+}
+
+.dashboard-container {
+    display: inline-flex;
+    justify-items: flex-start;
+}
+
+.dashboard-container div {
+    display: inline-block;
+}
+
+.demo-list-control {
+    width: 100%;
+    overflow-y: scroll;
+    height: 455px;
+}
+
+.demo-list-radio {
+    display: inline;
+}
+
+@media only screen and (max-width: 1025px) {
+    .dashboard-container {
+        display: block;
+    }
+
+    #friend-list {
+        margin: 0;
+        width: auto;
+        text-align: center;
+    }
+
+    .mdl-list {
+        width: 100% !important;
+    }
+
+    .table-container {
+        margin: 0;
+    }
+}
+
+.navbar {
+    background: #fdfdfd;
+    width: 100%;
+    position: fixed;
+    z-index: 99;
+    padding: 10px 0;
+}
+
+.log-in-out li a {
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 25px;
+    text-decoration: none;
+}
+
+.bar {
+    width: 80%;
+    margin: auto;
+    padding: 0px 30px;
+}
+
+.navbar .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .log-in-out {
+    display: inline-flex;
+}
+
+.log-in-out li {
+    list-style: none;
+    
+}
+
+.padding {
+    padding-top: 150px;
+}
+
+.Skedgelogoindex:hover b {
+    color: #1900ff;
+}
+
+.navbar .Skedgelogoindex a {
+    color: rgb(0, 172, 224);
+    font-size: 50px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+html,
+body {
+    font-family: sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.rounded_border {
+    padding: 10px 9px;
+    border: 2px solid rgb(0, 172, 224);
+    border-radius: 20px;
+    outline: none;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+body {
+    background-color: #fdfdfd;
+}
+
+.notextdec {
+    text-decoration: none;
+    color: rgb(0, 172, 224);
+    font-weight: 150;
+}
+
+
+.haveclass {
+    font-size: 20;
+    color: black;
+    background-color: lightgreen;
+    width: 100%;
+    height: 110%;
+    margin: 0;
+    padding: 0;
+}
+
+.friendhaveclasstoo {
+    font-size: 15px;
+    color: #fdfdfd;
+    background-color: cornflowerblue;
+    width: 100%;
+    height: 110%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    
+}
+
+.search {
+    width: 95%;
+    height: 6%;
+ 
+    
+
 }

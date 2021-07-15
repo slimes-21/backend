@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,50 +11,39 @@
 </head>
 
 <body>
-    <div class="container">
-        <form class="form-container" method="POST">
-            <div class="Skedgelogo">Skedge.</div>
-            <h2>Sign in</h2>
-            <p>Use your Skedge Account</p><br>
-            <div class="form-row">
-                <input type="text" name="email" placeholder="Email">
-            </div>
-            <div class="form-row">
-                <input type="password" name="password" placeholder="Password" class="pw1">
-            </div>
-
-            <p id="passwordmessage"></p>
-
-            <div class="form-row">
-                <button type="submit" class="submit">SIGN IN</button>
-            
-            </div><br>
-            <p>
-                Don't have an account yet? Sign up <a href="{{ url_for('signup') }}">here</a>
-            </p>
-        </form>
+<nav class="navbar">
+    <div class="bar">
+        <div class="Skedgelogoindex"><a href="{{ url_for('index') }}">Skedge.</a></div>
     </div>
+</nav>
+<div class="container">
+    <form class="form-container" method="POST">
+        <div class="Skedgelogo">Skedge.</div>
+        <h2>Sign in</h2>
+        <p>Use your Skedge Account</p><br>
+        {% if error %}
+            <div class="error_msg">
+                {{ error }}
+            </div><br>
+        {% endif %}
+        <div class="form-row">
+            <input type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-row">
+            <input type="password" name="password" placeholder="Password" class="pw1">
+        </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            document.querySelector('.submit').addEventListener('click', function() {
-                let pw1 = document.querySelector('.pw1');
-                let pw2 = document.querySelector('.pw2');
-              
-                if (pw1.value == "" || pw2.value == "") {
-                    alert("Field cannot be empty");
-                }
+        <p id="passwordmessage"></p>
 
-                else if (pw1 != pw2) {
-                    alert("Passwords must be matching")
-                } 
-            });
-        });
-
-        //won't just be a window alert button, will need for divs to move around first 
-
-    </script>
+        <div class="form-row">
+            <button type="submit" class="button" style="border:none;">SIGN IN</button>
+        </div>
+        <br>
+        <p>
+            Don't have an account yet? Sign up <a href="{{ url_for('signup') }}">here</a>
+        </p>
+    </form>
+</div>
 </body>
 
 </html>
