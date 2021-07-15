@@ -53,7 +53,11 @@ class User(UserMixin, db.Model):
             status=False).count()) > 0
 
     def reject_request(self, user):
-        self.unfriend_user(user)
+        friendship = Friendship.query.filter(
+            and_(Friendship.sender_id == user.id, Friendship.receiver_id == self.id)).one()
+        if friendship:
+            db.session.delete(friendship)
+            db.session.commit()
 
     def get_pending_requests(self):
         return Friendship.query.filter_by(receiver_id=self.id).filter_by(status=False).all()
