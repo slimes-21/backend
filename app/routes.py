@@ -90,6 +90,7 @@ def home():
         row += ["<td></td>"] * 5
         table.append(row)
     timetable = current_user.get_timetable()
+    checked_friends = []
     if timetable is not None:
         friends_timetable = []
         friends = request.args.get("friends")
@@ -98,6 +99,7 @@ def home():
                 friend_user = User.query.filter_by(username=friend).first()
                 if friend_user:
                     friends_timetable.append((friend_user, friend_user.get_timetable()))
+                    checked_friends.append(friend_user.username)
         for subject in timetable.subjects:
             row_index = time_legend[subject.time] - 1
             col_index = date_legend[subject.day]
@@ -106,15 +108,15 @@ def home():
             for friend_user, friend_timetable in friends_timetable:
                 for friend_subject in friend_timetable.subjects:
                     if friend_subject == subject:
-                        same_friends.append(friend_user.username)
+                        same_friends.append(friend_user.get_full_name())
                         break
             for i in range(row_index, row_index + duration):
                 if same_friends:
                     table[i][
-                        col_index] = f"<td><div class=\"haveclass\"><div class=\"friendhaveclasstoo\" friends=\"{','.join(same_friends)}\">{subject.code}</div></div></td>"
+                        col_index] = f"<td><div class=\"haveclass\"><div class=\"friendhaveclasstoo\" friends=\"{','.join(same_friends)}\">{subject.get_neat_code()}</div></div></td>"
                 else:
-                    table[i][col_index] = f"<td><div class=\"haveclass\">{subject.code}</div></td>"
-    return render_template('home.html', table=table)
+                    table[i][col_index] = f"<td><div class=\"haveclass\">{subject.get_neat_code()}</div></td>"
+    return render_template('home.html', table=table, checked_friends=checked_friends)
 
 
 @app.route('/profile/<username>')

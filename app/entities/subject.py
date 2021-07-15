@@ -9,6 +9,9 @@ class Subject:
         self.location = attributes[8]
         self.duration = attributes[10]
 
+    def get_neat_code(self):
+        return f"{self.code.split('_')[0]} {self.group.upper().replace('_', ' ')}"
+
     def __eq__(self, other):
         if not isinstance(other, Subject):
             return False
