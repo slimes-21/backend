@@ -3,11 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import login
 from app.entities.timetable import Timetable
-
-friends = db.Table('friends',
-                   db.Column('sender_id', db.Integer, db.ForeignKey('user.id')),
-                   db.Column('receiver_id', db.Integer, db.ForeignKey('user.id')),
-                   db.Column('status', db.Boolean, default=False))
+from sqlalchemy import or_, and_
 
 
 class User(UserMixin, db.Model):
@@ -16,7 +12,7 @@ class User(UserMixin, db.Model):
     first_name = db.Column(db.String(64), index=True, nullable=False)
     last_name = db.Column(db.String(64), index=True, nullable=False)
     bio = db.Column(db.String(255), nullable=True, default=None)
-    timetable = db.Column(db.BLOB, nullable=True, default=None)
+    timetable = db.Column(db.TEXT, nullable=True, default=None)
     password_hash = db.Column(db.String(128))
 
     def get_timetable(self):
@@ -30,20 +26,23 @@ class User(UserMixin, db.Model):
         db.session.commit()
         return friendship
 
-    def unfriend_user(self, user):
-        Friendship.query.filter_by(id=user.id).delete()
-
     def accept_request(self, user):
-        friendship = Friendship.query.get(user.id)
+        friendship = Friendship.query.filter(
+            and_(Friendship.sender_id == user.id, Friendship.receiver_id == self.id)).one()
         friendship.status = True
         db.session.commit()
         return friendship
+
+    def get_friends(self):
+        return Friendship.query.filter(
+            or_(Friendship.sender_id == self.id, Friendship.receiver_id == self.id)).filter_by(
+            status=True).all()
 
     def reject_request(self, user):
         self.unfriend_user(user)
 
     def get_pending_requests(self):
-        return Friendship.query.filter_by(receiver_id=self.id).all()
+        return Friendship.query.filter_by(receiver_id=self.id).filter_by(status=False).all()
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
@@ -70,7 +69,7 @@ class Friendship(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, index=True, nullable=False)
     receiver_id = db.Column(db.Integer, index=True, nullable=False)
-    status = db.Column(db.Boolean, default=True)
+    status = db.Column(db.Boolean, default=False)
 
     def get_sender(self):
         return User.query.get(self.sender_id)

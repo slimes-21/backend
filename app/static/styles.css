@@ -101,9 +101,6 @@ button {
 .form-row input,
 .form-row button {
     border: black 1px solid;
-    /* Alex said he will deal with this cause its his job and he hasnt done anything yet. */
-    /* border-radius: 10px; */
-    /* Alex what do u thnk of making the borders the same gray as the placeholder color */
     flex-grow: 1;
     max-width: 100%;
     margin-left: 10px;
@@ -218,3 +215,44 @@ body {
 .error_msg {
     color: red;
 } 
+
+.error-pic {
+    width: 500px;
+    padding-bottom: 30px;
+  }
+
+.error-fit {
+padding-top: 130px;
+display: grid;
+grid-column-gap: 0px;
+grid-template-columns: auto auto;
+padding: auto;
+align-items: center;
+justify-items: center;
+justify-content: center;
+}
+
+.error-para {
+text-align: left;
+padding-right: 50px;
+}
+
+.button1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 0px;
+  
+    border-radius: 30px;
+    background-color: #e1e9ee;
+    border: none;
+    height: 35px;
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .error-middle {
+    text-align: center;
+    margin-top: 130px;
+  }

@@ -117,8 +117,8 @@ body {
     outline: none;
     margin-top: 10px;
     margin-left: 5px;
-    margin-right: 5px;
-    width: 200px;
+    margin-right: 10%;
+    width: 60%;
     height: auto;
     text-align: center;
     object-position: right;
@@ -135,18 +135,39 @@ body {
 
 .form-container {
     background-color: white;
-    width: 35%;
+    width: 55%;
     text-align: center;
     padding: 30px;
     border-radius: 20px;
-    border:rgb(0, 172, 224) 1px solid;
+    border:rgb(0, 172, 224) 2px solid;
+    margin-left: 15%;
 }
 
 .form-container h1 {
     font-weight: 100;
 }
 
-
 .pleasegototheright {
-    object-position: right;
+    object-position: center;
+}
+
+.block { 
+    display: flex; 
+    justify-content: center; 
+}
+
+.centerplease {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    margin-right: 10%;
+}
+
+.moverightpls {
+    text-align: right;
+}
+
+.form-row {
+    padding-bottom: 10px;
 }

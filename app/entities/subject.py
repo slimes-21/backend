@@ -10,4 +10,3 @@ class Subject:
         self.time = attributes[6]
         self.location = attributes[8]
         self.duration = attributes[10]
-        print(self.code)

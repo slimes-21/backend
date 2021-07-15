@@ -51,15 +51,15 @@ def login():
     if request.method == 'GET':
         return render_template('sign_in.html')
 
-    email = request.form['email']
+    username = request.form['username']
     password = request.form['password']
 
-    if email == '' or password == '':
+    if username == '' or password == '':
         return render_template('sign_in.html', error='Please enter both a email and a password')
 
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(username=username).first()
     if user is None or not user.check_password(password):
-        return render_template('sign_in.html', error='Invalid email or password')
+        return render_template('sign_in.html', error='Invalid username or password')
 
     login_user(user)
     return redirect(url_for('home'))
@@ -90,31 +90,21 @@ def profile(username):
 @login_required
 def self_profile():
     if request.method == 'GET':
-        return render_template('profile.html')
+        return render_template('profile.html', friend_requests=current_user.get_pending_requests())
     bio = request.form['bio']
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    email = request.form['email']
-    username = request.form['username']
 
-    existing_user = User.query.filter_by(username=username).first()
-    if existing_user is not None and existing_user != current_user:
-        return render_template('profile.html', error='That username is already in use')
     timetable = request.files.get('timetable', None)
     if timetable:
         _, file_ext = os.path.splitext(timetable.filename)
         if file_ext not in ['.xls']:
-            return render_template('profile.html', error='Please upload a valid xls file')
+            return render_template('profile.html', error='Please upload a valid xls file',
+                                   friend_requests=current_user.get_pending_requests())
         input_excel = pd.read_excel(timetable.read(), dtype=str)
         output_csv = input_excel.to_csv()
         current_user.timetable = output_csv
 
     current_user.bio = bio
-    current_user.first_name = first_name
-    current_user.last_name = last_name
-    current_user.username = username
     db.session.commit()
-
     return redirect(url_for('self_profile'))
 
 
@@ -143,15 +133,16 @@ def accept_friend(username):
 def reject_friend(username):
     user = User.query.filter_by(username=username).first_or_404()
     if user == current_user:
-        return redirect(url_for('edit_profile'))
+        return redirect(url_for('self_profile'))
     current_user.reject_request(user)
-    return redirect(url_for('edit_profile'))
+    return redirect(url_for('self_profile'))
 
-# @app.errorhandler(404)
-# def not_found_error(error):
-#     return render_template('404.html'), 404
-#
-#
-# @app.errorhandler(500)
-# def internal_error(error):
-#     return render_template('500.html'), 500
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('500.html'), 500

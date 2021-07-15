@@ -92,6 +92,7 @@ table {
     border-radius: 20px;
     border: #e7e0e0 1px solid;
     display: inline-block;
+    margin-bottom: 50px;
 }
 
 .dashboard-container {
@@ -247,7 +248,4 @@ body {
 .search {
     width: 95%;
     height: 6%;
- 
-    
-
 }

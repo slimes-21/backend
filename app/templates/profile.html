@@ -12,6 +12,9 @@
     <div class="bar">
         <div class="Skedgelogoindex"><a href="{{ url_for('index') }}">Skedge.</a></div>
         <ul class="log-in-out">
+            <div class="centerplease">
+                <input type="text" placeholder="Search for friends.." class="search">
+            </div>
             <a href="{{ url_for('logout') }}" class="notextdec">
                 <div class="rounded_border">
                     <li>Sign Out</li>
@@ -22,48 +25,51 @@
 </nav>
 <div class="padding">
 </div>
-<div class="incfriendrequests">
-    <div class="pleasegototheright">
-        You have 3 incoming friend requests
-        <ul>
-            <li>
-                Alexander Mai wants to be your friend!
-                <button>Accept this request</button>
-                <button>Decline this request</button>
-            </li>
-            <li>
-                Raymond He wants to be your friend!
-                <button>Accept this request</button>
-                <button>Decline this request</button>
-            </li>
-            <li>
-                Andrew Wang wants to be your friend!
-                <button>Accept this request</button>
-                <button>Decline this request</button>
-            </li>
-        </ul>
+
+
+<div class="block">
+    <div class="container">
+        <form class="form-container" method="POST" enctype="multipart/form-data">
+            <div class="Skedgelogo">Skedge.</div>
+
+            <div class="form-row" id="noresize">
+                <textarea id="newbio" name="bio" rows="6" cols="40" placeholder="Enter your new biography">{{ current_user.bio }}</textarea>
+            </div>
+
+
+            <div class="form-row">
+                <button type="submit" class="submit">Save</button>
+            </div>
+            <div>
+                Insert a new csv file
+                <input type="file" id="myFile" name="timetable">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="incfriendrequests">
+        <div class="pleasegototheright">
+            You have {{ friend_requests|length }} incoming friend requests
+            {% if friend_requests|length > 0 %}
+                <ul>
+                    {% for request in friend_requests %}
+                        <li>
+                            {{ request.get_sender().get_full_name() }}
+                            <a href="/accept/{{ request.get_sender().username }}">
+                                <button>Accept this request</button>
+                            </a>
+                            <a href="/reject/{{ request.get_sender().username }}">
+                                <button>Decline this request</button>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
     </div>
 </div>
 
-<div class="container">
-    <form class="form-container" method="POST" enctype="multipart/form-data">
-        <div class="Skedgelogo">Skedge.</div>
-
-        <div class="form-row" id="noresize">
-            <textarea id="newbio" name="bio" rows="6" cols="40" placeholder="Enter your new biography"></textarea>
-        </div>
-
-
-        <div class="form-row">
-            <button type="submit" class="submit">Save</button>
-        </div>
-        <div>
-            Insert a new csv file
-            <input type="file" id="myFile" name="timetable">
-            <button type="submit">Submit</button>
-        </div>
-    </form>
-</div>
 
 </body>
 

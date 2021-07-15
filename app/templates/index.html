@@ -14,87 +14,109 @@
 <header>
     <nav class="navbar">
         <div class="bar">
-            <div class="Skedgelogoindex"><a href="index.html">Skedge.</a></div>
-            <ul class="log-in-out">
-                <a href="{{ url_for('login') }}" class="notextdec">
-                    <div class="rounded_border">
-                        <li>Sign in</li>
-                    </div>
-                </a>
-                <a href="{{ url_for('signup') }}" class="notextdec">
-                    <div class="rounded_border">
-                        <li>Get Started</li>
-                    </div>
-                </a>
-            </ul>
+            <div class="Skedgelogoindex"><a href="{{ url_for('index') }}">Skedge.</a></div>
+            {% if current_user.is_authenticated %}
+                <ul class="log-in-out">
+                    <a href="{{ url_for('self_profile') }}" class="notextdec">
+                        <div class="rounded_border">
+                            <li><b>My Profile</b></li>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="notextdec">
+                        <div class="rounded_border">
+                            <li><b>Sign Out</b></li>
+                        </div>
+                    </a>
+                </ul>
+            {% else %}
+                <ul class="log-in-out">
+                    <a href="{{ url_for('login') }}" class="notextdec">
+                        <div class="rounded_border">
+                            <li><b>Sign in</b></li>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('signup') }}" class="notextdec">
+                        <div class="rounded_border">
+                            <li><b>Get Started</b></li>
+                        </div>
+                    </a>
+                </ul>
+            {% endif %}
         </div>
     </nav>
 </header>
 <div class="padding">
 </div>
 
-<div class="block">
-    <img class='rightbirds'
-         src='https://media.discordapp.net/attachments/858982129873190923/864804226220032000/bird_adobespark.png'>
-    <div>
-        <h1 class="headings">
-            Why use Skedge
-        </h1>
-        <p>
-            Some text
-        </p>
-    </div>
-</div>
-<br>
 
 <div class="block">
+    <img class='birdleft' src='{{ url_for('static', filename='bird_adobespark.png') }}'>
     <div>
+        <br><br><br><br><br><br>
         <h1 class="headings">
-            some shit fffffffffffffffffffffffffffffff
+            Mismatching Schedules?
         </h1>
         <p>
-            some text
-        </p>
+        <div class="textgoestoolong">
+            Simplify the allocation experience and <br>
+            find overlapping classes with friends in an instant.
+        </div>
+        </p><br>
+        <form action="{{ url_for('signup') }}">
+            <button type="submit" class="button" style="border:none;"><b> Get Started </b></button>
+        </form>
     </div>
-    <img class='rightbirds'
-         src='https://cdn.discordapp.com/attachments/863752282105053206/864855029516599306/tempsnip.png' width="900"
-         height="800" alt="Planner">
 </div>
-<br>
+<br><br><br>
 
 <div class="block">
-    <img class='rightbirds'
-         src='https://media.discordapp.net/attachments/858982129873190923/864804226220032000/bird_adobespark.png'>
-    <div>
+    <div><br><br><br><br><br><br>
         <h1 class="headings">
-            some shit fffffffffffffffffffffffffffffff
+            The Skedge experience
         </h1>
         <p>
-            some text
+        <div class="textgoestoolong">
+            Skedge users can upload and compare
+            classes <br> without the hassle. <br><br> Take a lecture,
+            laboratory, tutorial <br> or any other class and
+            watch it <br> seemlessly compare with friends
+
+        </div>
+        </p>
+    </div>
+    <img class='sizingproblems' src='{{ url_for('static', filename='captures1.PNG') }}'>
+</div>
+<br><br><br><br><br>
+
+<div class="block">
+    <img class="sizingproblems1" src='{{ url_for('static', filename='2bird2.png') }}'>
+    <div><br><br><br><br><br><br>
+        <h1 class="headings">
+            The more the merrier
+        </h1>
+        <p>
+        <div class="textgoestoolong">
+            Make the next allocation period stress free, <br>
+            Its always more fun with friends
+        </div>
         </p>
     </div>
 </div>
-<br><br><br><br>
+<br><br><br><br><br><br><br><br>
 <div>
     <div class="skedgefooter"><a class="notextdec" href="{{ url_for('index') }}"><b>Skedge.</b></a></div>
-    <br><br>
-    <div>
-        <a class="linkedin notextdec" href="https://www.linkedin.com/in/amaii/"><p>Alexander Mai</p></a>
-        <br>
-        <a class="linkedin notextdec" href="https://www.linkedin.com/in/rayjhe/"><p>Raymond He</p></a>
-        <br>
-        <a class="linkedin notextdec" href="https://www.linkedin.com/in/allister-lim-8b5454197/"><p>Allister Lim</p></a>
-        <br>
-        <a class="linkedin notextdec" href="https://www.linkedin.com/in/andrew-wang-b987091a5/"><p>Andrew Wang</p></a>
-        <br>
-        <a class="linkedin notextdec" href="https://www.linkedin.com/in/elijahaa/"><p>Elijah
-            Agunbaide</p></a>
-        <br><br><br>
+    <div class="inline">
+        <ul>
+            <li><a class="linkedin notextdec" href="https://www.linkedin.com/in/amaii/">Alexander Mai</a></li>
+            <li><a class="linkedin notextdec" href="https://www.linkedin.com/in/rayjhe/">Raymond He</a></li>
+            <li><a class="linkedin notextdec" href="https://www.linkedin.com/in/allister-lim-8b5454197/">Allister
+                Lim</a></li>
+            <li><a class="linkedin notextdec" href="https://www.linkedin.com/in/andrew-wang-b987091a5/">Andrew Wang</a>
+            </li>
+            <li><a class="linkedin notextdec" href="https://www.linkedin.com/in/elijahaa/">Elijah Agunbiade</a></li>
+        </ul>
     </div>
-
-
 </div>
-
 </body>
 </html>
 
