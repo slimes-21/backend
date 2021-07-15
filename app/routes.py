@@ -139,7 +139,7 @@ def self_profile():
     if timetable:
         _, file_ext = os.path.splitext(timetable.filename)
         if file_ext not in ['.xls']:
-            return render_template('profile.html', error='Please upload a valid xls file',
+            return render_template('profile.html', error='Please upload a valid xls file. You can get this from Allocate',
                                    friend_requests=current_user.get_pending_requests())
         input_excel = pd.read_excel(timetable.read(), dtype=str)
         output_csv = input_excel.to_csv(sep="!")
